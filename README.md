@@ -6,6 +6,38 @@ displays CPU, memory, disk, and network activity in the GNOME top bar.
 <img src="./screenshots/tophat.png?raw=true" width="1080px" alt="Screenshot of
 TopHat">
 
+## About this fork
+
+This is a temporary fork that I maintain to keep using TopHat while some
+changes are not yet upstream. `main` carries:
+
+- GNOME 51 support, from
+  [fflewddur/tophat#212](https://github.com/fflewddur/tophat/pull/212)
+- A fix for CPU accounting: iowait is counted as idle, and irq, softirq and
+  steal as busy, so usage matches other monitors
+
+Each change also lives on its own branch so it can be proposed upstream
+separately. I hope to upstream all of them so this fork becomes obsolete. When
+a release of upstream TopHat contains them, switch back to it.
+
+### Installing this fork
+
+This replaces an installation from extensions.gnome.org. You need `git`,
+`node`, `yarn` (4.x, see the Contributing section) and `glib-compile-schemas`.
+
+```sh
+git clone https://github.com/Takuto88/tophat.git
+cd tophat
+yarn install
+yarn build
+mkdir -p ~/.local/share/gnome-shell/extensions/tophat@fflewddur.github.io
+cp -r dist/* ~/.local/share/gnome-shell/extensions/tophat@fflewddur.github.io/
+```
+
+Then log out and back in (on Wayland) and enable the extension with
+`gnome-extensions enable tophat@fflewddur.github.io`. To update, pull and run
+the same steps again.
+
 ## Release notes
 
 See [RELEASES.md](RELEASES.md) for the list of fixes and new functionality
